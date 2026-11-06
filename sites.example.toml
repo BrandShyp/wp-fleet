@@ -1,0 +1,36 @@
+# Copy to sites.toml and fill in your own servers. sites.toml is gitignored.
+
+[sites.blog]
+host = "blog.example.com"
+user = "deploy"
+port = 22
+key = "~/.ssh/id_ed25519"
+wp_path = "~/public_html"
+url = "https://blog.example.com/"
+# Run after a successful update. "purge all" on some cache plugins skips a static
+# front page, so purge it by URL as well.
+purge = [
+  "wp litespeed-purge all",
+  "wp litespeed-purge url https://blog.example.com/",
+]
+
+[sites.shop]
+host = "shop.example.org"
+user = "deploy"
+wp_path = "/var/www/shop"
+url = "https://shop.example.org/"
+purge = ["wp cache flush"]
+
+# Cache settings every site should share. The defaults below read and write
+# LiteSpeed Cache options; change get/set for another plugin.
+[audit]
+get = "wp litespeed-option get {key}"
+set = "wp litespeed-option set {key} {value}"
+
+[audit.baseline]
+"optm-css_min" = "1"
+"optm-js_min" = "1"
+"optm-js_defer" = "1"
+"optm-css_async" = "0"   # measured slower on a text-heavy hero; keep off unless you test it
+"media-lazy" = "1"
+"cache-browser" = "1"
