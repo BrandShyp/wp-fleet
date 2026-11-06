@@ -90,6 +90,9 @@ output, one exec per site, a dry run that never writes, the rollback file existi
 the write, a failed backup stopping the update, a "successful" update that changed
 nothing being caught, and an audit snapshot that restores cleanly.
 
+This is version 0.1: a clean rewrite of the tooling we use on our own sites, tested
+against the fake server only. Run it on a staging site before you point it at production.
+
 ## About
 
 Built by [BrandShyp](https://brandshyp.org), a software firm in San Antonio. MIT licensed.
